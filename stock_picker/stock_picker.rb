@@ -1,14 +1,19 @@
 def stock_picker(array)
-  res = []
+  min_price = array[0]
+  min_index = 0
   max_profit = 0
+  res = []
+
   array.each_with_index do |price, index|
-    array.each_with_index do |price2, index2|
-      if index2 > index && price2 - price > max_profit
-        max_profit = price2 - price
-        res = [index, index2]
-      end
+    if price < min_price
+      min_price = price
+      min_index = index
+    elsif price - min_price > max_profit
+      max_profit = price - min_price
+      res = [min_index, index]
     end
   end
+
   res
 end
 
